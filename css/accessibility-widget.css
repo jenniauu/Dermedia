@@ -1,0 +1,131 @@
+.accessibility-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#widget-toggle {
+  background-color: #103a71 !important;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+}
+
+#widget-toggle:hover,
+#widget-toggle:focus {
+  background-color: #0b2a54;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.widget-panel {
+  display: none;
+  background-color: #fff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.widget-panel[aria-hidden="false"] {
+  display: block;
+}
+
+.widget-panel h2 {
+  font-family: "Roca", sans-serif;
+  font-size: 1.5rem;
+  color: #103a71;
+  margin-bottom: 10px;
+}
+
+.widget-panel h3 {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2rem;
+  color: #3a2b1c;
+  margin: 10px 0 5px;
+}
+
+.widget-panel button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #9eb9d4 !important;
+  border: none;
+  border-radius: 5px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  color: #3a2b1c;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.widget-panel button:hover,
+.widget-panel button:focus {
+  background-color: #7a9cc0;
+  outline: 2px solid #103a71;
+  outline-offset: 2px;
+}
+
+#widget-close {
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #103a71;
+  cursor: pointer;
+}
+
+#widget-close:hover,
+#widget-close:focus {
+  color: #0b2a54;
+}
+
+@media (max-width: 767px) {
+  .accessibility-widget {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .widget-panel {
+    width: 250px;
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .widget-panel {
+    width: 200px;
+    padding: 1rem;
+  }
+
+  .widget-panel h2 {
+    font-size: 1.2rem;
+  }
+
+  .widget-panel h3 {
+    font-size: 1rem;
+  }
+
+  .widget-panel button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}
