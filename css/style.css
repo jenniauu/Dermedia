@@ -233,6 +233,7 @@ main {
   flex-direction: column;
   gap: 2rem;
   background-color: #fff6eb;
+  height: 100%;
 }
 
 .page-header {
