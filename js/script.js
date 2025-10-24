@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle sidebar visibility on mobile
   mobileMenu.addEventListener("click", () => {
     sidebar.classList.toggle("active");
+    document.querySelector(".nav-list").classList.toggle("active");
   });
 
   // Adicionar interação aos itens do menu
@@ -147,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
     cancelBtn.className = "cancel-btn";
     cancelBtn.innerHTML = "<img src='/images/deletar.png'>";
     cancelBtn.addEventListener("click", resetToUploadWidget);
-
     const approveBtn = document.createElement("button");
     approveBtn.className = "approve-btn";
     approveBtn.innerHTML = "<img src='/images/aceitar.png'>";
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
       warning2:
         "As recomendações não substituem o diagnóstico e tratamento profissional. O objetivo é evitar piorar a condição enquanto se busca ajuda médica.",
     },
-    Conglobata: {
+    "Acne Conglobata": {
       warning1:
         "Aviso Crítico: Estas condições requerem tratamento médico urgente com medicamentos de uso oral. Não há cuidados caseiros eficazes. As dicas abaixo visam apenas não piorar a situação até a consulta.",
       severity: "Muito Severa",
@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
       warning2:
         "As recomendações não substituem o diagnóstico e tratamento profissional. O objetivo é evitar piorar a condição enquanto se busca ajuda médica.",
     },
-    Fulminans: {
+    "Acne Fulminans": {
       warning1:
         "Aviso Crítico: Estas condições requerem tratamento médico urgente com medicamentos de uso oral. Não há cuidados caseiros eficazes. As dicas abaixo visam apenas não piorar a situação até a consulta.",
       severity: "Muito Severa",
@@ -698,5 +698,3 @@ function showSlides(n) {
   }
   slides[slideIndex - 1].style.display = "block";
 }
-
-
