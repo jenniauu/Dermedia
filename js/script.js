@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
       warning2:
         "As recomendações não substituem o diagnóstico e tratamento profissional. O objetivo é evitar piorar a condição enquanto se busca ajuda médica.",
     },
-    "Acne Conglobata": {
+    Conglobata: {
       warning1:
         "Aviso Crítico: Estas condições requerem tratamento médico urgente com medicamentos de uso oral. Não há cuidados caseiros eficazes. As dicas abaixo visam apenas não piorar a situação até a consulta.",
       severity: "Muito Severa",
@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
       warning2:
         "As recomendações não substituem o diagnóstico e tratamento profissional. O objetivo é evitar piorar a condição enquanto se busca ajuda médica.",
     },
-    "Acne Fulminans": {
+    Fulminans: {
       warning1:
         "Aviso Crítico: Estas condições requerem tratamento médico urgente com medicamentos de uso oral. Não há cuidados caseiros eficazes. As dicas abaixo visam apenas não piorar a situação até a consulta.",
       severity: "Muito Severa",
@@ -697,4 +697,5 @@ function showSlides(n) {
     slides[i].style.display = "none";
   }
   slides[slideIndex - 1].style.display = "block";
+
 }
