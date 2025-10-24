@@ -223,6 +223,7 @@ main {
   display: flex;
   flex: 1;
   overflow: hidden;
+  min-height: 100%;
 }
 
 .main-content {
