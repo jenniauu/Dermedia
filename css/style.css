@@ -264,7 +264,7 @@ h2 {
   border-radius: 0.75rem;
   padding: 1.5rem;
   box-shadow: 0.3125rem 0.5rem 0.5rem #4a312481;
-  height: fit-content;
+  height: 100%;
 }
 
 .result-header {
@@ -1107,4 +1107,5 @@ h2 {
     top: 65%;
   }
 }
+
 
