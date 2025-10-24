@@ -233,7 +233,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background-color: #fff6eb;
+  background-color: #fffbf7;
   height: 100%;
 }
 
@@ -279,7 +279,7 @@ h2 {
 }
 
 .preview-container {
-  background-color: #fff6eb;
+  background-color: #fffbf7;
   border-radius: 0.5rem;
   overflow: hidden;
   margin-bottom: 2rem;
@@ -306,7 +306,7 @@ h2 {
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
-  background-color: #fff6eb;
+  background-color: #fffbf7;
   text-align: center;
   padding: 1.25rem;
   color: #4a3124;
