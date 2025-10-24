@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle sidebar visibility on mobile
   mobileMenu.addEventListener("click", () => {
     sidebar.classList.toggle("active");
-    document.querySelector(".nav-list").classList.toggle("active");
   });
 
   // Adicionar interação aos itens do menu
@@ -699,3 +698,4 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
 
 }
+
