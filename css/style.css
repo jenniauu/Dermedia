@@ -281,13 +281,13 @@ h2 {
 }
 
 .preview-container {
-  background-color: #fffbf7;
+  background-color: #fff6eb;
   border-radius: 0.5rem;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   width: 100%;
   max-width: 750px;
-  height: 24rem;
+  height: 31.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -308,12 +308,10 @@ h2 {
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
-  background-color: #fffbf7;
+  background-color: #fff6eb;
   text-align: center;
   padding: 1.25rem;
   color: #4a3124;
-  font-family: 'Nunito';
-  font-size: 1.2rem;
 }
 
 .upload-widget p {
@@ -324,7 +322,7 @@ h2 {
   font-family: 'Nunito', sans-serif;
   padding: 0.625rem 1.25rem;
   margin: 0.3125rem;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
   border-radius: 1.25rem;
   border: none;
   background-color: #9eb9d4;
@@ -1109,3 +1107,4 @@ h2 {
     top: 65%;
   }
 }
+
