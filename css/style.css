@@ -1092,3 +1092,13 @@ h2 {
     top: 65%;
   }
 }
+
+@media (min-width: 1200px){
+  main {
+  min-height: 100%;
+}
+
+.main-content {
+  min-height: 100%;
+}
+}
