@@ -891,6 +891,10 @@ h2 {
   animation-play-state: paused !important;
 }
 
+#content-wrapper{
+  min-height: 100%;
+}
+
 /* === Responsive Design === */
 @media (max-width: 768px) {
   body {
