@@ -238,7 +238,7 @@ main {
   flex-direction: column;
   gap: 1rem;
   background-color: #fffbf7;
-  height: 100%;
+  max-height: 100%;
 }
 
 .page-header {
