@@ -23,6 +23,7 @@ body {
 
 body::-webkit-scrollbar {
   width: var(--sb-size);
+
 }
 
 body::-webkit-scrollbar-track {
@@ -33,8 +34,8 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 1px;
+  
 }
-
 #accessibility-widget {
   --sb-track-color: #fffbf7;
   --sb-thumb-color: #103a71;
@@ -42,7 +43,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #accessibility-widget::-webkit-scrollbar {
-  width: var(--sb-size);
+  width: var(--sb-size)
 }
 
 #accessibility-widget::-webkit-scrollbar-track {
@@ -53,11 +54,13 @@ body::-webkit-scrollbar-thumb {
 #accessibility-widget::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 12px;
+  
 }
 
 @supports not selector(::-webkit-scrollbar) {
   body {
-    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
   }
 }
 
@@ -136,12 +139,6 @@ a {
   margin: 0.5rem;
   transition: transform 0.3s, opacity 0.3s;
 }
-
-header + main {
-  margin-bottom: 0;
-  bottom: 0;
-}
-
 /* === Sidebar === */
 .sidebar {
   width: 280px;
@@ -186,7 +183,7 @@ header + main {
   cursor: pointer;
   transition: background 0.2s;
   gap: 0.75rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .menu-item:hover {
@@ -195,7 +192,7 @@ header + main {
 
 .menu-item.active {
   background: rgba(255, 255, 255, 0.15);
-  border-left: 0.25rem solid #fffbf7;
+  border-left: 0.25rem solid #fff6eb;
 }
 
 .menu-item span {
@@ -213,8 +210,8 @@ header + main {
 }
 
 .icon-sidebar {
-  width: 5vh;
-  height: 5vh;
+  width: 4vh;
+  height: 4vh;
 }
 
 #toggle-sidebar {
@@ -234,8 +231,8 @@ main {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  background-color: #fffbf7;
+  gap: 2rem;
+  background-color: #fff6eb;
 }
 
 .page-header {
@@ -245,13 +242,15 @@ main {
 }
 
 h1 {
-  font-size: 1.72rem;
+
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
   font-weight: 600;
   color: #4a3124;
 }
 
 h2 {
-  font-size: 1.5rem;
+
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   font-weight: 600;
   color: #4a3124;
 }
@@ -262,7 +261,6 @@ h2 {
   border-radius: 0.75rem;
   padding: 1.5rem;
   box-shadow: 0.3125rem 0.5rem 0.5rem #4a312481;
-  height: fit-content;
 }
 
 .result-header {
@@ -279,13 +277,13 @@ h2 {
 }
 
 .preview-container {
-  background-color: #fffbf7;
+  background-color: #fff6eb;
   border-radius: 0.5rem;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   width: 100%;
   max-width: 750px;
-  height: 24rem;
+  height: 31.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,12 +304,10 @@ h2 {
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
-  background-color: #fffbf7;
+  background-color: #fff6eb;
   text-align: center;
   padding: 1.25rem;
   color: #4a3124;
-  font-family: 'Nunito';
-  font-size: 1.2rem;
 }
 
 .upload-widget p {
@@ -322,7 +318,7 @@ h2 {
   font-family: 'Nunito', sans-serif;
   padding: 0.625rem 1.25rem;
   margin: 0.3125rem;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
   border-radius: 1.25rem;
   border: none;
   background-color: #9eb9d4;
@@ -380,7 +376,7 @@ h2 {
 .severity-badge {
   padding: 0.3125rem 0.75rem;
   border-radius: 1.25rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -392,7 +388,7 @@ h2 {
 #warning-rare-text:not(:empty) {
   padding: 0.3125rem 0.75rem;
   border-radius: 1.25rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
   background: #e74c3c;
   color: white;
   display: inline-block;
@@ -401,14 +397,14 @@ h2 {
 #warning-text:not(:empty) {
   padding: 0.3125rem 0.75rem;
   border-radius: 1.25rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
   background: #e67e22;
   color: white;
   display: inline-block;
 }
 
 .analysis-details {
-  background: #fffbf7;
+  background: #fff6eb;
   padding: 1rem;
   border-radius: 0.5rem;
 }
@@ -463,7 +459,7 @@ h2 {
 }
 
 .modal-content {
-  background-color: #fffbf7;
+  background-color: #fff6eb;
   margin: 5% auto;
   padding: 0;
   border-radius: 0.75rem;
@@ -522,7 +518,7 @@ h2 {
 }
 
 .history-item:hover {
-  background-color: #e0c8b1;
+  background-color: #d4b99a;
 }
 
 .history-date {
@@ -559,29 +555,27 @@ h2 {
   background-color: #e0c8b1;
   color: #4a3124;
   cursor: pointer;
-  padding: 1.2rem;
+  padding: 1rem;
   width: 100%;
   text-align: left;
   border: none;
   outline: none;
   transition: background-color 0.4s;
-  font-size: 1.2rem;
-  font-family: 'Nunito';
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
   font-weight: 600;
-  border-bottom: 1px solid #e0c8b1;
+  border-bottom: 1px solid #d4b99a;
 }
 
 .accordion-btn.active,
 .accordion-btn:hover {
-  background-color: #e0c8b1;
+  background-color: #d4b99a;
 }
 
 .accordion-content {
-  padding: 1.5rem;
+  padding: 0 1rem;
   display: none;
-  background-color: #fffbf7;
-  font-size: 1.2rem;
-  font-family: 'Nunito';
+  background-color: #fff6eb;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 .accordion-content-tutorial {
@@ -591,7 +585,7 @@ h2 {
   max-width: fit-content;
 }
 
-.tutorial {
+.tutorial{
   max-width: 100%;
   max-height: 100%;
 }
@@ -631,6 +625,7 @@ h2 {
   to { opacity: 1; }
 }
 
+
 /* === Back Button === */
 .back-btn {
   position: absolute;
@@ -645,7 +640,7 @@ h2 {
 }
 
 .back-btn:hover {
-  background-color: #103a71;
+  background-color: #0c2b58;
 }
 
 /* === Screen Reader Only === */
@@ -661,6 +656,7 @@ h2 {
 }
 
 /* Accessibility Classes */
+/* Consolidated and fixed class names; apply to wrapper descendants where appropriate */
 #content-wrapper.contrast-invert {
   filter: invert(100%);
 }
@@ -830,7 +826,7 @@ h2 {
   bottom: 80px;
   right: 20px;
   z-index: 10000;
-  background-color: #fffbf7 !important;
+  background-color: #fffbf7 !important; /* Garantir fundo branco */
   border: none;
   border-radius: 12px;
   padding: 15px;
@@ -843,6 +839,7 @@ h2 {
   font-family: 'Nunito';
 }
 
+/* Garante que o widget não seja afetado pelas classes de acessibilidade, exceto para background-color */
 #accessibility-widget,
 #accessibility-toggle,
 #accessibility-widget *,
@@ -856,6 +853,7 @@ h2 {
   cursor: initial !important;
 }
 
+/* Estilos para seções do widget */
 .widget-section {
   margin-bottom: 15px;
   font-family: 'Nunito' !important;
@@ -864,7 +862,7 @@ h2 {
 .widget-section h3 {
   font-size: 16px;
   margin-bottom: 8px;
-  color: #103a71 !important;
+  color: #103a71 !important; /* Cor fixa para títulos */
 }
 
 .widget-section button,
@@ -873,8 +871,8 @@ h2 {
   width: 100%;
   margin: 5px 0;
   padding: 8px;
-  background-color: #9eb9d4 !important;
-  color: #4a3124 !important;
+  background-color: #9eb9d4 !important; /* Garantir fundo cinza claro */
+  color: #4a3124 !important; /* Cor do texto fixa */
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -883,9 +881,10 @@ h2 {
 
 .widget-section button:hover,
 #accessibility-widget button[data-action="reset"]:hover {
-  background-color: #e0e0e0 !important;
+  background-color: #e0e0e0 !important; /* Garantir fundo no hover */
 }
 
+/* Adicionado: Classe para pausar animações */
 #content-wrapper.pause-animations * {
   animation-play-state: paused !important;
 }
@@ -1035,17 +1034,6 @@ h2 {
   .menu-item.active {
     border-left: none;
   }
-
-  #accessibility-toggle {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-  }
-
-  #accessibility-widget {
-    bottom: 130px;
-    max-height: 65vh;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1100,160 +1088,5 @@ h2 {
   .userway_buttons_wrapper {
     right: 0.3125rem;
     top: 65%;
-  }
-}
-
-/* === Responsive Design for Larger Screens === */
-@media (min-width: 1200px) {
-  .sidebar {
-    width: 320px;
-  }
-
-  .sidebar.collapsed {
-    width: 90px;
-  }
-
-  .main-content {
-    padding: 2.5vw;
-  }
-
-  .logo {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-  }
-
-  .nav-list li {
-    font-size: 1.4rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-  }
-
-  .preview-container {
-    max-width: 900px;
-    height: 28rem;
-  }
-
-  .upload-widget {
-    font-size: 1.4rem;
-  }
-
-  .upload-widget button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1.2rem;
-  }
-
-  .diagnostic-result {
-    padding: 2rem;
-  }
-
-  .result-content {
-    gap: 2.5rem;
-  }
-
-  .modal-content {
-    max-width: 1000px;
-  }
-
-  .modal-body {
-    padding: 1.5rem;
-  }
-
-  .accordion-btn {
-    font-size: 1.4rem;
-  }
-
-  .accordion-content {
-    font-size: 1.4rem;
-  }
-}
-
-@media (min-width: 1600px) {
-  .sidebar {
-    width: 360px;
-  }
-
-  .sidebar.collapsed {
-    width: 100px;
-  }
-
-  .main-content {
-    padding: 3vw;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .logo {
-    font-size: clamp(2.2rem, 3vw, 3.2rem);
-  }
-
-  .nav-list li {
-    font-size: 1.6rem;
-    gap: 5rem;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  .preview-container {
-    max-width: 1100px;
-    height: 32rem;
-  }
-
-  .upload-widget {
-    font-size: 1.6rem;
-  }
-
-  .upload-widget button {
-    padding: 1rem 2rem;
-    font-size: 1.4rem;
-  }
-
-  .diagnostic-result {
-    padding: 2.5rem;
-  }
-
-  .result-content {
-    gap: 3rem;
-  }
-
-  .modal-content {
-    max-width: 1200px;
-  }
-
-  .modal-body {
-    padding: 2rem;
-  }
-
-  .accordion-btn {
-    font-size: 1.6rem;
-  }
-
-  .accordion-content {
-    font-size: 1.6rem;
-  }
-
-  #accessibility-widget {
-    max-width: 350px;
-    padding: 20px;
-  }
-
-  .widget-section h3 {
-    font-size: 18px;
-  }
-
-  .widget-section button,
-  #accessibility-widget button[data-action="reset"] {
-    padding: 10px;
-    font-size: 1.1rem;
   }
 }
