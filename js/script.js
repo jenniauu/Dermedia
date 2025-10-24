@@ -145,11 +145,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const cancelBtn = document.createElement("button");
     cancelBtn.className = "cancel-btn";
-    cancelBtn.innerHTML = "<img src='images/deletar.png'>";
+    cancelBtn.innerHTML = "<img src='/imagens/deletar.png'>";
     cancelBtn.addEventListener("click", resetToUploadWidget);
+
     const approveBtn = document.createElement("button");
     approveBtn.className = "approve-btn";
-    approveBtn.innerHTML = "<img src='images/aceitar.png'>";
+    approveBtn.innerHTML = "<img src='/imagens/aceitar.png'>";
     approveBtn.addEventListener("click", function () {
       if (capturedImage) {
         analyzeImage(capturedImage);
@@ -207,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
     iconContainer.className = "camera-icon-container";
     const cameraBtn = document.createElement("button");
     cameraBtn.className = "camera-btn";
-    cameraBtn.innerHTML = "<img src='images/capturar.png'>";
+    cameraBtn.innerHTML = "<img src='/imagens/capturar.png'>";
     cameraBtn.addEventListener("click", captureImage);
     iconContainer.appendChild(cameraBtn);
     previewContainer.appendChild(iconContainer);
@@ -252,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
     iconContainer.className = "camera-icon-container";
     const retakeBtn = document.createElement("button");
     retakeBtn.className = "retake-btn";
-    retakeBtn.innerHTML = "<img src='images/refazer.png'>";
+    retakeBtn.innerHTML = "<img src='/imagens/refazer.png'>";
     retakeBtn.addEventListener("click", function () {
       iconContainer.remove();
       initCamera();
@@ -448,64 +449,68 @@ document.addEventListener("DOMContentLoaded", function () {
     maxPredictions = model.getTotalClasses();
   }
 
-// Atualiza analyzeImage para usar a nova verificação
-async function analyzeImage(imageElement) {
-  if (!isSkinImage(imageElement)) {
-    alert("A imagem não parece ser de pele humana ou contém padrões uniformes. Por favor, envie uma foto clara da área afetada pela acne.");
-    resetToUploadWidget();
-    return;
-  }
-
-  const prediction = await model.predict(imageElement);
-  let highestPrediction = prediction[0];
-  for (let i = 1; i < prediction.length; i++) {
-    if (prediction[i].probability > highestPrediction.probability) {
-      highestPrediction = prediction[i];
+  // Atualiza analyzeImage para usar a nova verificação
+  async function analyzeImage(imageElement) {
+    if (!isSkinImage(imageElement)) {
+      alert("A imagem não parece ser de pele humana ou contém padrões uniformes. Por favor, envie uma foto clara da área afetada pela acne.");
+      resetToUploadWidget();
+      return;
     }
+
+    const prediction = await model.predict(imageElement);
+    let highestPrediction = prediction[0];
+    for (let i = 1; i < prediction.length; i++) {
+      if (prediction[i].probability > highestPrediction.probability) {
+        highestPrediction = prediction[i];
+      }
+    }
+
+    const lesionTypeElement = document.getElementById("lesion-type");
+    const lesionTypeText = `${highestPrediction.className}`;
+    lesionTypeElement.textContent = lesionTypeText;
+
+    const acneInfo = acneMapping[highestPrediction.className] || {
+      severity: "Desconhecida",
+      inflammation: "Desconhecida",
+      recommendations: ["Consulte um dermatologista para avaliação."],
+      warning1: "",
+      warning2: "",
+    };
+
+    document.getElementById("severity-level").textContent = acneInfo.severity;
+    document.getElementById("inflammation").textContent = acneInfo.inflammation;
+    document.getElementById("warning-rare-text").textContent = acneInfo.warning1 || "";
+    document.getElementById("warning-text").textContent = acneInfo.warning2 || "";
+
+    const recommendationsList = document.getElementById("recommendations-list");
+    recommendationsList.innerHTML = "";
+    acneInfo.recommendations.forEach((rec) => {
+      const li = document.createElement("li");
+      li.textContent = rec;
+      recommendationsList.appendChild(li);
+    });
+
+    const now = new Date();
+    const analysisData = {
+      date: now.toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }),
+      imageData: imageElement.src,
+      lesionType: lesionTypeText,
+      severity: acneInfo.severity,
+      inflammation: acneInfo.inflammation,
+      recommendations: acneInfo.recommendations,
+      warning1: acneInfo.warning1 || "",
+      warning2: acneInfo.warning2 || "",
+    };
+
+    saveToHistory(analysisData);
   }
-
-  const lesionTypeElement = document.getElementById("lesion-type");
-  const lesionTypeText = `${highestPrediction.className}`;
-  lesionTypeElement.textContent = lesionTypeText;
-
-  const acneInfo = acneMapping[highestPrediction.className] || {
-    severity: "Desconhecida",
-    inflammation: "Desconhecida",
-    recommendations: ["Consulte um dermatologista para avaliação."],
-  };
-
-  document.getElementById("severity-level").textContent = acneInfo.severity;
-  document.getElementById("inflammation").textContent = acneInfo.inflammation;
-  document.getElementById("warning-rare-text").textContent = acneInfo.warning1 || "";
-  document.getElementById("warning-text").textContent = acneInfo.warning2 || "";
-
-  const recommendationsList = document.getElementById("recommendations-list");
-  recommendationsList.innerHTML = "";
-  acneInfo.recommendations.forEach((rec) => {
-    const li = document.createElement("li");
-    li.textContent = rec;
-    recommendationsList.appendChild(li);
-  });
-
-  const now = new Date();
-  const analysisData = {
-    date: now.toLocaleString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }),
-    imageData: imageElement.src,
-    lesionType: lesionTypeText,
-    severity: acneInfo.severity,
-    inflammation: acneInfo.inflammation,
-    recommendations: acneInfo.recommendations,
-  };
-
-  saveToHistory(analysisData);
-}
 
   window.addEventListener("load", () => {
     loadModel();
@@ -599,6 +604,8 @@ function loadAnalysisFromHistory(index) {
     document.getElementById("severity-level").textContent = analysis.severity;
     document.getElementById("lesion-type").textContent = analysis.lesionType;
     document.getElementById("inflammation").textContent = analysis.inflammation;
+    document.getElementById("warning-rare-text").textContent = analysis.warning1 || "";
+    document.getElementById("warning-text").textContent = analysis.warning2 || "";
 
     const recommendationsList = document.getElementById("recommendations-list");
     recommendationsList.innerHTML = "";
@@ -696,6 +703,4 @@ function showSlides(n) {
     slides[i].style.display = "none";
   }
   slides[slideIndex - 1].style.display = "block";
-
 }
-
