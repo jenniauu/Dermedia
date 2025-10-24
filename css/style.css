@@ -23,7 +23,6 @@ body {
 
 body::-webkit-scrollbar {
   width: var(--sb-size);
-
 }
 
 body::-webkit-scrollbar-track {
@@ -34,8 +33,8 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 1px;
-  
 }
+
 #accessibility-widget {
   --sb-track-color: #fffbf7;
   --sb-thumb-color: #103a71;
@@ -43,7 +42,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #accessibility-widget::-webkit-scrollbar {
-  width: var(--sb-size)
+  width: var(--sb-size);
 }
 
 #accessibility-widget::-webkit-scrollbar-track {
@@ -54,13 +53,11 @@ body::-webkit-scrollbar-thumb {
 #accessibility-widget::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 12px;
-  
 }
 
 @supports not selector(::-webkit-scrollbar) {
   body {
-    scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }
 
@@ -139,6 +136,7 @@ a {
   margin: 0.5rem;
   transition: transform 0.3s, opacity 0.3s;
 }
+
 /* === Sidebar === */
 .sidebar {
   width: 280px;
@@ -151,6 +149,7 @@ a {
   position: relative;
   z-index: 100;
   overflow-y: auto;
+  min-height: calc(100vh - 12vh); /* Ensure sidebar takes full height minus header */
 }
 
 .sidebar.collapsed {
@@ -219,11 +218,17 @@ a {
 }
 
 /* === Main Content === */
+#content-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure wrapper takes full viewport height */
+}
+
 main {
   display: flex;
   flex: 1;
   overflow: hidden;
-  min-height: 100%;
+  min-height: calc(100vh - 12vh); /* Full height minus header */
 }
 
 .main-content {
@@ -234,7 +239,7 @@ main {
   flex-direction: column;
   gap: 2rem;
   background-color: #fffbf7;
-  height: 100%;
+  min-height: calc(100vh - 12vh); /* Ensure main-content takes full height minus header */
 }
 
 .page-header {
@@ -244,14 +249,12 @@ main {
 }
 
 h1 {
-
   font-size: clamp(1.5rem, 3vw, 1.8rem);
   font-weight: 600;
   color: #4a3124;
 }
 
 h2 {
-
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   font-weight: 600;
   color: #4a3124;
@@ -587,7 +590,7 @@ h2 {
   max-width: fit-content;
 }
 
-.tutorial{
+.tutorial {
   max-width: 100%;
   max-height: 100%;
 }
@@ -627,7 +630,6 @@ h2 {
   to { opacity: 1; }
 }
 
-
 /* === Back Button === */
 .back-btn {
   position: absolute;
@@ -658,7 +660,6 @@ h2 {
 }
 
 /* Accessibility Classes */
-/* Consolidated and fixed class names; apply to wrapper descendants where appropriate */
 #content-wrapper.contrast-invert {
   filter: invert(100%);
 }
@@ -828,7 +829,7 @@ h2 {
   bottom: 80px;
   right: 20px;
   z-index: 10000;
-  background-color: #fffbf7 !important; /* Garantir fundo branco */
+  background-color: #fffbf7 !important;
   border: none;
   border-radius: 12px;
   padding: 15px;
@@ -841,7 +842,6 @@ h2 {
   font-family: 'Nunito';
 }
 
-/* Garante que o widget não seja afetado pelas classes de acessibilidade, exceto para background-color */
 #accessibility-widget,
 #accessibility-toggle,
 #accessibility-widget *,
@@ -855,7 +855,6 @@ h2 {
   cursor: initial !important;
 }
 
-/* Estilos para seções do widget */
 .widget-section {
   margin-bottom: 15px;
   font-family: 'Nunito' !important;
@@ -864,7 +863,7 @@ h2 {
 .widget-section h3 {
   font-size: 16px;
   margin-bottom: 8px;
-  color: #103a71 !important; /* Cor fixa para títulos */
+  color: #103a71 !important;
 }
 
 .widget-section button,
@@ -873,8 +872,8 @@ h2 {
   width: 100%;
   margin: 5px 0;
   padding: 8px;
-  background-color: #9eb9d4 !important; /* Garantir fundo cinza claro */
-  color: #4a3124 !important; /* Cor do texto fixa */
+  background-color: #9eb9d4 !important;
+  color: #4a3124 !important;
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -883,16 +882,12 @@ h2 {
 
 .widget-section button:hover,
 #accessibility-widget button[data-action="reset"]:hover {
-  background-color: #e0e0e0 !important; /* Garantir fundo no hover */
+  background-color: #e0e0e0 !important;
 }
 
 /* Adicionado: Classe para pausar animações */
 #content-wrapper.pause-animations * {
   animation-play-state: paused !important;
-}
-
-#content-wrapper{
-  min-height: 100%;
 }
 
 /* === Responsive Design === */
@@ -945,6 +940,7 @@ h2 {
 
   main {
     flex-direction: column;
+    min-height: calc(100vh - 12vh); /* Ensure main takes full height minus header */
   }
 
   .sidebar {
@@ -958,6 +954,7 @@ h2 {
     justify-content: space-around;
     padding: 0.3125rem 0;
     box-shadow: 0 -0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    min-height: auto; /* Override min-height for mobile */
   }
 
   .sidebar.collapsed {
@@ -1003,6 +1000,7 @@ h2 {
   .main-content {
     padding: 1rem;
     margin-bottom: 3.75rem;
+    min-height: calc(100vh - 12vh - 3.75rem); /* Adjust for header and sidebar height */
   }
 
   .page-header {
@@ -1097,12 +1095,12 @@ h2 {
   }
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
   main {
-  min-height: 100%;
-}
+    min-height: calc(100vh - 12vh); /* Ensure main takes full height minus header */
+  }
 
-.main-content {
-  min-height: 100%;
-}
+  .main-content {
+    min-height: calc(100vh - 12vh); /* Ensure main-content takes full height minus header */
+  }
 }
