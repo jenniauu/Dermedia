@@ -84,7 +84,6 @@ nav {
   background-color: #103a71;
   padding: 0 2vw;
   flex-shrink: 0;
-  height: 12vh;
 }
 
 .logo {
@@ -896,4 +895,5 @@ button:focus-visible {
     object-fit: cover;
     object-position: center;
   }
+
 }
