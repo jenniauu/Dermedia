@@ -537,7 +537,14 @@ button:focus-visible {
 #content-wrapper.pause-animations * {
   animation-play-state: paused !important;
 }
-
+footer{
+  text-align: center;
+  background-color: #103a71;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: 'Nunito';
+  color: #fffbf7;
+}
 /* === Responsividade === */
 
 /* Grandes telas (1200px ou mais) */
@@ -763,7 +770,7 @@ button:focus-visible {
 
   footer {
     margin: 0;
-    padding: 0;
+    padding: 1rem;
   }
 
   .accessibility-widget {
@@ -897,3 +904,4 @@ button:focus-visible {
   }
 
 }
+
