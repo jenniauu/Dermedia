@@ -87,7 +87,6 @@ nav {
   background-color: #103a71;
   padding: 0 2vw;
   flex-shrink: 0;
-  height: 12vh;
 }
 
 .logo {
@@ -1103,4 +1102,5 @@ h2 {
   .main-content {
     min-height: calc(100vh - 12vh); /* Ensure main-content takes full height minus header */
   }
+
 }
