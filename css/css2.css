@@ -1,12 +1,14 @@
-
+/* === Font Definitions === */
 @font-face {
   font-family: 'Nunito';
-  src: url(/css/Nunito-Regular.ttf);
+  src: url(Nunito-Regular.ttf) format('truetype');
+  font-weight: 100 900;
 }
 
 @font-face {
-  font-family: 'Roca One';
-  src: url(/css/Roca\ Bold.ttf);
+  font-family: 'Roca';
+  src: url(Roca\ Regular.ttf) format('truetype');
+  font-weight: bold;
 }
 
 * {
@@ -150,5 +152,5 @@ background-color: #e0c8b1;
 }
 
 #userName{
-    font-family: 'Roca One';
+    font-family: 'Roca';
 }
