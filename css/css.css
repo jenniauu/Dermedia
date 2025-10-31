@@ -1,32 +1,15 @@
-/* style.css */
-/**
- * Estilos para Página de Login/Cadastro com Transição Animada
- * 
- * Este arquivo contém:
- * - Definições de fontes customizadas
- * - Estilos gerais e reset
- * - Estilos específicos para formulários
- * - Animações para transição entre telas
- * - Media queries para responsividade
- * 
- * @version 1.0
- * @author [Seu Nome]
- */
-
-/* ============ FONTES CUSTOMIZADAS ============ */
-/**
- * @font1 - Usada para títulos
- * @font2 - Usada para descrições e textos menores
- */
+/* === Font Definitions === */
 @font-face {
-  font-family: "font1";
-  src: url(/css/Roca\ Bold.ttf);
-} /* Titulo */
+  font-family: 'Nunito';
+  src: url(Nunito-Regular.ttf) format('truetype');
+  font-weight: 100 900;
+}
 
 @font-face {
-  font-family: "font2";
-  src: url(/css/Nunito-Regular.ttf);
-} /*descrição e subtitulos*/
+  font-family: 'Roca';
+  src: url(Roca\ Regular.ttf) format('truetype');
+  font-weight: bold;
+}
 
 /* ============ RESET E ESTILOS GLOBAIS ============ */
 * {
@@ -87,7 +70,7 @@ body {
 
 /* ============ ESTILOS DE TEXTO ============ */
 .title {
-  font-family: "font1";
+  font-family: "Roca";
   font-size: 28px;
   font-weight: bold;
   text-transform: capitalize;
@@ -102,7 +85,7 @@ body {
 }
 
 .description {
-  font-family: "font2";
+  font-family: "Nunito";
   font-size: 20px;
   font-weight: 300;
   line-height: 30px;
@@ -121,7 +104,7 @@ body {
   border-radius: 15px;
   text-transform: uppercase;
   color: #fff;
-  font-family: "font2";
+  font-family: "Nunito";
   font-size: 15px;
   padding: 10px 48px;
   cursor: pointer;
@@ -187,15 +170,16 @@ body {
 
 .first-column {
   text-align: center;
-  width: 40%;
+  width: 50%;
   z-index: 10;
 }
 
 .second-column {
-  width: 60%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 /* ============ REDES SOCIAIS ============ */
@@ -246,7 +230,7 @@ body {
   outline: none;
   background-color: #fff6eb;
   border-radius: 15px;
-  font-family: "font2";
+  font-family: "Nunito";
   font-size: 20px;
   margin: 0 auto;
 }
@@ -264,7 +248,7 @@ body {
 }
 
 .input-hint {
-  font-family: "font2";
+  font-family: "Nunito";
   font-size: 0.8rem;
   color: #5a5a5a;
   text-align: left;
@@ -358,7 +342,7 @@ input:-webkit-autofill {
   font-size: 20px;
   margin: 15px 0;
   text-align: center;
-  font-family: "font2";
+  font-family: "Nunito";
   margin: 1rem 0;
   display: inline-block;
   transition: all 0.3s ease;
@@ -393,7 +377,7 @@ input:-webkit-autofill {
 /* Estilos para mensagens de erro */
 .error-message {
   color: #d32f2f;
-  font-family: "font2";
+  font-family: "Nunito";
   font-size: 14px;
   margin: 10px auto;
   padding: 12px;
