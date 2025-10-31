@@ -51,82 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return { h: h * 360, s: s * 100, v: v * 100 };
   }
-  
-  function isSkinImage(imageElement) {
-    const canvas = document.createElement('canvas');
-    canvas.width = imageElement.width;
-    canvas.height = imageElement.height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-  
-    let rSum = 0, gSum = 0, bSum = 0;
-    let rSqSum = 0, gSqSum = 0, bSqSum = 0;
-    let skinPixelCount = 0;
-    let edgeCount = 0; // Para detecção de bordas
-    const totalPixels = imageData.length / 4;
-    const sampleRate = Math.max(1, Math.floor(totalPixels / 20000)); // Amostra ~20k pixels para maior precisão
-  
-    // Para detecção de bordas simples (gradiente)
-    const pixelsToCheck = [];
-    for (let i = 0; i < imageData.length; i += 4 * sampleRate) {
-      pixelsToCheck.push(i);
-    }
-  
-    for (let idx = 0; idx < pixelsToCheck.length; idx++) {
-      const i = pixelsToCheck[idx];
-      const r = imageData[i];
-      const g = imageData[i + 1];
-      const b = imageData[i + 2];
-  
-      // Acumula para desvio padrão
-      rSum += r; gSum += g; bSum += b;
-      rSqSum += r * r; gSqSum += g * g; bSqSum += b * b;
-  
-      // Verifica tom de pele (faixa expandida)
-      const hsv = rgbToHsv(r, g, b);
-      if (hsv.h >= 0 && hsv.h <= 60 && hsv.s >= 10 && hsv.s <= 80 && hsv.v >= 30 && hsv.v <= 100) {
-        skinPixelCount++;
-      }
-  
-      // Detecção de bordas (opcional): compara com pixel vizinho
-      if (idx < pixelsToCheck.length - 1) {
-        const nextIdx = pixelsToCheck[idx + 1];
-        if (nextIdx < imageData.length) {
-          const rNext = imageData[nextIdx];
-          const gNext = imageData[nextIdx + 1];
-          const bNext = imageData[nextIdx + 2];
-          const diff = Math.abs(r - rNext) + Math.abs(g - gNext) + Math.abs(b - bNext);
-          if (diff > 30) { // Limite de diferença para considerar borda
-            edgeCount++;
-          }
-        }
-      }
-    }
-  
-    const sampledPixels = pixelsToCheck.length;
-  
-    // Calcula médias
-    const rMean = rSum / sampledPixels;
-    const gMean = gSum / sampledPixels;
-    const bMean = bSum / sampledPixels;
-  
-    // Calcula desvios padrões
-    const rStd = Math.sqrt((rSqSum / sampledPixels) - rMean * rMean);
-    const gStd = Math.sqrt((gSqSum / sampledPixels) - gMean * gMean);
-    const bStd = Math.sqrt((bSqSum / sampledPixels) - bMean * bMean);
-    const avgStd = (rStd + gStd + bStd) / 3;
-  
-    // Calcula porcentagem de pixels de pele
-    const skinPercentage = (skinPixelCount / sampledPixels) * 100;
-  
-    // Verifica bordas (mínimo 5% de bordas para confirmar textura)
-    const edgePercentage = (edgeCount / sampledPixels) * 100;
-  
-    // Critérios: desvio padrão > 10 OU bordas > 5%, e pele >= 20%
-    return (avgStd > 10 || edgePercentage > 5) && skinPercentage >= 20;
-  }
-  
 
   // Função para resetar para o widget de upload
   function resetToUploadWidget() {
@@ -451,11 +375,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Atualiza analyzeImage para usar a nova verificação
   async function analyzeImage(imageElement) {
-    if (!isSkinImage(imageElement)) {
-      alert("A imagem não parece ser de pele humana ou contém padrões uniformes. Por favor, envie uma foto clara da área afetada pela acne.");
-      resetToUploadWidget();
-      return;
-    }
 
     const prediction = await model.predict(imageElement);
     let highestPrediction = prediction[0];
