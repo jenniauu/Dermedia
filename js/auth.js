@@ -111,22 +111,31 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
         });
 });
 
-// LOGIN COM GOOGLE
+// LOGIN COM GOOGLE – VERSÃO 100% FUNCIONAL NO GITHUB PAGES (2025)
 ["googleLogin", "googleLoginAlt"].forEach(id => {
-    document.getElementById(id)?.addEventListener("click", (e) => {
+    document.getElementById(id)?.addEventListener("click", async (e) => {
         e.preventDefault();
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                // Salvar dados do usuário do Google
-                return saveUserData(result.user);
-            })
-            .then((success) => {
-                window.location.href = "perfil.html";  // Alterado para perfil.html
-            })
-            .catch((error) => {
-                console.error("Erro no login com Google:", error);
-                alert("Erro ao fazer login com Google. Tente novamente.");
-            });
+
+        try {
+            const result = await auth.signInWithPopup(provider);
+            await saveUserData(result.user);
+            window.location.href = "perfil.html";
+
+        } catch (error) {
+            console.error("Erro Google:", error.code, error.message);
+
+            // Mensagens amigáveis para os erros mais comuns
+            let msg = "Erro ao logar com Google.";
+            if (error.code === "auth/popup-blocked") {
+                msg = "Pop-up bloqueado. Permita pop-ups neste site ou use o celular.";
+            } else if (error.code === "auth/network-request-failed") {
+                msg = "Erro de rede. Verifique sua internet e tente novamente.";
+            } else if (error.code === "auth/cancelled-popup-request") {
+                msg = "Login cancelado.";
+            }
+
+            alert(msg);
+        }
     });
 });
 
@@ -237,3 +246,4 @@ setupPasswordToggle('loginPassword', 'toggleLoginPassword');
 
 // Inicializar verificação de estado de autenticação
 document.addEventListener('DOMContentLoaded', checkAuthState);
+
