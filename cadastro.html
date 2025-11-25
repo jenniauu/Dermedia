@@ -14,20 +14,20 @@
 
     <!-- Remova o link para o favicon que não existe ou corrija o caminho -->
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    
+    <!-- Firebase SDK - ORDEM CORRETA: app -> auth -> firestore -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <!-- Inicialização do Firebase -->
     <script>
         // Configuração do Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyAcfDrhIqWqXtd44j3uZ0yiiqBEmZ7aW2s",
-            authDomain: "atividade-9a9b8.firebaseapp.com",
-            projectId: "atividade-9a9b8",
-            storageBucket: "atividade-9a9b8.appspot.com",
-            messagingSenderId: "919835195659",
-            appId: "1:919835195659:web:4abc76b8b651aad9f48a0e"
+            apiKey: "AIzaSyA0sDKUzReP6QuxXUAo_FQb6i72OoTv_rY",
+            authDomain: "dermedia-67601.firebaseapp.com",
+            projectId: "dermedia-67601",
+            storageBucket: "dermedia-67601.firebasestorage.app",
+            messagingSenderId: "1032000954999",
+            appId: "1:1032000954999:web:7a30d9f6e2641b937edc72"
         };
         
         // Initialize Firebase
