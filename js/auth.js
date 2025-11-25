@@ -111,24 +111,21 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
         });
 });
 
-// LOGIN COM GOOGLE - VERSÃO FINAL (popup puro - agora funciona em PC e mobile)
+// LOGIN COM GOOGLE
 ["googleLogin", "googleLoginAlt"].forEach(id => {
     document.getElementById(id)?.addEventListener("click", (e) => {
         e.preventDefault();
         auth.signInWithPopup(provider)
             .then((result) => {
+                // Salvar dados do usuário do Google
                 return saveUserData(result.user);
             })
-            .then(() => {
-                window.location.href = "perfil.html";
+            .then((success) => {
+                window.location.href = "perfil.html";  // Alterado para perfil.html
             })
             .catch((error) => {
                 console.error("Erro no login com Google:", error);
-                if (error.code === "auth/popup-blocked") {
-                    alert("Pop-up bloqueado. Desative o bloqueador de anúncios ou permita pop-ups neste site.");
-                } else {
-                    alert("Erro ao logar com Google: " + error.message);
-                }
+                alert("Erro ao fazer login com Google. Tente novamente.");
             });
     });
 });
@@ -239,8 +236,4 @@ setupPasswordToggle('regPassword', 'toggleRegPassword');
 setupPasswordToggle('loginPassword', 'toggleLoginPassword');
 
 // Inicializar verificação de estado de autenticação
-
 document.addEventListener('DOMContentLoaded', checkAuthState);
-
-
-
