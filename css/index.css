@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 html, body {
   height: 100%;
   margin: 0;
@@ -37,6 +38,20 @@ body::-webkit-scrollbar-thumb {
   border-radius: 1px;
   
 }
+
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 #accessibility-widget {
   --sb-track-color: #fffbf7;
   --sb-thumb-color: #103a71;
@@ -942,5 +957,6 @@ footer{
   }
 
 }
+
 
 
