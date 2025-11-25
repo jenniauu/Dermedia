@@ -111,40 +111,58 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
         });
 });
 
-// LOGIN COM GOOGLE - VERSÃO CORRIGIDA (funciona no PC!)
+// LOGIN COM GOOGLE - VERSÃO CORRIGIDA (popup com fallback para redirect)
 ["googleLogin", "googleLoginAlt"].forEach(id => {
     document.getElementById(id)?.addEventListener("click", async (e) => {
         e.preventDefault();
 
         try {
-            // Usa redirect (funciona em desktop e mobile)
-            await auth.signInWithRedirect(provider);
-            // O resultado será processado no onAuthStateChanged ou na próxima carga
+            // Tenta popup primeiro (funciona bem no mobile)
+            const result = await auth.signInWithPopup(provider);
+            
+            // Se chegou aqui, popup funcionou - salva dados e redireciona
+            await saveUserData(result.user);
+            window.location.href = "perfil.html";
+            
         } catch (error) {
-            console.error("Erro no signInWithRedirect:", error);
-            if (error.code !== 'auth/popup-blocked') {
+            console.log("Popup bloqueado ou erro:", error.code);
+            
+            // Se for bloqueio de popup (comum no PC), tenta redirect como fallback
+            if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
+                try {
+                    console.log("Tentando fallback com redirect...");
+                    await auth.signInWithRedirect(provider);
+                    // O redirect será processado no getRedirectResult abaixo
+                } catch (redirectError) {
+                    console.error("Fallback redirect falhou:", redirectError);
+                    alert("Login com Google falhou. Tente desabilitar bloqueadores de pop-up ou use outro navegador.");
+                }
+            } else {
+                // Outros erros
+                console.error("Erro no login com Google:", error);
                 alert("Erro ao fazer login com Google. Tente novamente.");
             }
         }
     });
 });
 
-// Processa o resultado do redirect quando a página carrega
+// Processa o resultado do redirect (fallback ou mobile)
 auth.getRedirectResult()
     .then((result) => {
         if (result && result.user) {
-            // Usuário acabou de logar com Google via redirect
+            // Usuário logou via redirect
+            console.log("Login via redirect bem-sucedido!");
             saveUserData(result.user).then(() => {
                 window.location.href = "perfil.html";
             });
         }
     })
     .catch((error) => {
-        if (error.code !== 'auth/no-such-user' && error.code !== 'auth/cancelled-popup-request') {
-            console.error("Erro ao processar redirect:", error);
+        // Ignora erros não críticos (como 'no redirect operation')
+        if (error.code !== 'auth/no-redirect-result') {
+            console.error("Erro no processamento do redirect:", error);
         }
     });
-
 // RECUPERAÇÃO DE SENHA
 document.getElementById("passwordResetForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -253,3 +271,4 @@ setupPasswordToggle('loginPassword', 'toggleLoginPassword');
 // Inicializar verificação de estado de autenticação
 
 document.addEventListener('DOMContentLoaded', checkAuthState);
+
