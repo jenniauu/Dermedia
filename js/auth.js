@@ -145,6 +145,22 @@ auth.getRedirectResult()
         }
     });
 
+// Processa o resultado do redirect quando a página carrega
+auth.getRedirectResult()
+    .then((result) => {
+        if (result && result.user) {
+            // Usuário acabou de logar com Google via redirect
+            saveUserData(result.user).then(() => {
+                window.location.href = "perfil.html";
+            });
+        }
+    })
+    .catch((error) => {
+        if (error.code !== 'auth/no-such-user' && error.code !== 'auth/cancelled-popup-request') {
+            console.error("Erro ao processar redirect:", error);
+        }
+    });
+
 // RECUPERAÇÃO DE SENHA
 document.getElementById("passwordResetForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -253,3 +269,4 @@ setupPasswordToggle('loginPassword', 'toggleLoginPassword');
 // Inicializar verificação de estado de autenticação
 
 document.addEventListener('DOMContentLoaded', checkAuthState);
+
