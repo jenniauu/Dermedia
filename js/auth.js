@@ -111,38 +111,21 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
         });
 });
 
-// LOGIN COM GOOGLE - VERSÃO CORRIGIDA (popup com fallback para redirect)
+// LOGIN COM GOOGLE
 ["googleLogin", "googleLoginAlt"].forEach(id => {
-    document.getElementById(id)?.addEventListener("click", async (e) => {
+    document.getElementById(id)?.addEventListener("click", (e) => {
         e.preventDefault();
-
-        try {
-            // Tenta popup primeiro (funciona bem no mobile)
-            const result = await auth.signInWithPopup(provider);
-            
-            // Se chegou aqui, popup funcionou - salva dados e redireciona
-            await saveUserData(result.user);
-            window.location.href = "perfil.html";
-            
-        } catch (error) {
-            console.log("Popup bloqueado ou erro:", error.code);
-            
-            // Se for bloqueio de popup (comum no PC), tenta redirect como fallback
-            if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
-                try {
-                    console.log("Tentando fallback com redirect...");
-                    await auth.signInWithRedirect(provider);
-                    // O redirect será processado no getRedirectResult abaixo
-                } catch (redirectError) {
-                    console.error("Fallback redirect falhou:", redirectError);
-                    alert("Login com Google falhou. Tente desabilitar bloqueadores de pop-up ou use outro navegador.");
-                }
-            } else {
-                // Outros erros
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                return saveUserData(result.user);
+            })
+            .then((success) => {
+                window.location.href = "perfil.html";
+            })
+            .catch((error) => {
                 console.error("Erro no login com Google:", error);
                 alert("Erro ao fazer login com Google. Tente novamente.");
-            }
-        }
+            });
     });
 });
 
@@ -271,4 +254,5 @@ setupPasswordToggle('loginPassword', 'toggleLoginPassword');
 // Inicializar verificação de estado de autenticação
 
 document.addEventListener('DOMContentLoaded', checkAuthState);
+
 
